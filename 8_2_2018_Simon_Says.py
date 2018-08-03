@@ -11,15 +11,6 @@ def gameStart():
 		print ("Incorrect input please enter either 'Yes', or 'No'") 
 		gameStart()
 
-#used to prompt the user for an answer to the given pattern
-def simonSays(answer):
-	userInput = input("type in what Simon said: ")
-	if userInput == answer: 
-		print ("Congrats! You are correct!")
-		print ("Now for the next challenge:")
-	else:
-		print ("Not quite. Here, try again:")
-
 gameStart()
 
 
