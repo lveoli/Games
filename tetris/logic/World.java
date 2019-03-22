@@ -18,8 +18,8 @@ public class World implements Serializable {
     //maps rooms to their coordinates
     public TERenderer ter;
     public TETile T = Tileset.WALL;
-    public final int WIDTH = 80;
-    public final int HEIGHT = 40;
+    public final int WIDTH = 12;
+    public final int HEIGHT = 22;
 
     public World() {
         ter = new TERenderer();
@@ -66,11 +66,32 @@ public class World implements Serializable {
         }
     }
 
+    public  void drawRoom(int width, int height,
+                          int xPos, int yPos, TETile t) {
+        //if the room is out of bounds just don't draw it
+        if (width + xPos > WIDTH || height + yPos > HEIGHT) {
+            System.out.println(width);
+            System.out.println(xPos);
+            System.out.println(WIDTH);
+            System.out.println(height);
+            System.out.println(yPos);
+            System.out.println(HEIGHT);
+            System.out.println("the hi");
+            return;
+        }
+        //draws outline of room
+        drawRectangle(width, height, xPos, yPos, t);
+        //hollows out room by filling it in with FLOOR
+        drawRectangle(width - 2, height - 2, xPos + 1, yPos + 1, Tileset.FLOOR);
+        //generates room coordinates
+    }
+
 
     //where all the drawing happens
     public void generateWorld() {
         world = new TETile[WIDTH][HEIGHT];
         addSpaces();
-
+        drawRoom(WIDTH, HEIGHT, 0, 0, Tileset.FLOWER);
+        ter.renderFrame(world);
     }
 }

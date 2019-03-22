@@ -25,7 +25,6 @@ public class Main {
     }
 
     public static void startScreen() {
-        Random x = new Random();
         ter = new TERenderer();
         StdDraw.setCanvasSize(80 * 16, 40 * 16);
         Font font = new Font("Monaco", Font.BOLD, 30);
@@ -60,7 +59,7 @@ public class Main {
 
     public static void main(String[] args) {
         startScreen();
-        World hello = new World();
-        hello.drawShape();
+//        World hello = new World();
+//        hello.drawShape();
     }
 }
