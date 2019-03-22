@@ -2,6 +2,7 @@ package logic;
 
 import TileEngine.TERenderer;
 import TileEngine.TETile;
+import TileEngine.Tileset;
 import edu.princeton.cs.introcs.StdDraw;
 
 import java.awt.*;
@@ -41,7 +42,12 @@ public class Main {
         char keyPress = waitForInput();
         if (keyPress == 'n') {
             World world = new World();
-            world.generateWorld();
+            StdDraw.clear();
+            world.getWorld()[20][20] = Tileset.FLOWER;
+            world.getWorld()[20][20] = Tileset.NOTHING;
+            ter.renderFrame(world.getWorld());
+            StdDraw.show();
+//            world.generateWorld();
         } else if (keyPress == 'q') {
             StdDraw.clear();
             StdDraw.text(40, 19, "See you next time!");
@@ -58,7 +64,5 @@ public class Main {
 
     public static void main(String[] args) {
         startScreen();
-        World hello = new World();
-        hello.drawShape();
     }
 }

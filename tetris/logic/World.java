@@ -2,7 +2,7 @@ package logic;
 import TileEngine.TETile;
 import TileEngine.Tileset;
 import TileEngine.TERenderer;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import edu.princeton.cs.introcs.StdDraw;
 
 import java.io.Serializable;
 import java.util.*;
@@ -12,14 +12,15 @@ public class World implements Serializable {
     public static TETile[][] world;
 
     //maps rooms to their coordinates
-    public TERenderer ter;
+    public TileEngine.TERenderer ter;
     public TETile T = Tileset.WALL;
     public static final int WIDTH = 80;
-    public static final int HEIGHT = 160;
+    public static final int HEIGHT = 50;
 
     public World() {
         ter = new TERenderer();
         ter.initialize(WIDTH, HEIGHT);
+        world = new TETile[WIDTH][HEIGHT];
     }
 
     //adds N tiles to a row at specified location
@@ -64,11 +65,16 @@ public class World implements Serializable {
 
     //where all the drawing happens
     public void generateWorld() {
-        world = new TETile[WIDTH][HEIGHT];
         addSpaces();
         System.out.println(WIDTH);
         System.out.println(HEIGHT);
-        drawRectangle(WIDTH - 5, HEIGHT - 5, 1, 1, Tileset.WALL);
-        ter.renderFrame(world);
+        addTiles(20, 20, Tileset.WALL, 5);
+        StdDraw.show();
+//        drawRectangle(20, 20, 20, 20, Tileset.WALL);
+//        ter.renderFrame(world);
+    }
+
+    public static TETile[][] getWorld() {
+        return world;
     }
 }
