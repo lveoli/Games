@@ -1,18 +1,17 @@
-package logic;
 import TileEngine.TETile;
 import TileEngine.Tileset;
 import TileEngine.TERenderer;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import edu.princeton.cs.introcs.StdDraw;
 
 import java.io.Serializable;
 import java.util.*;
 
 
-public class World implements Serializable {
+public class World {
     public static TETile[][] world;
 
     //maps rooms to their coordinates
-    public TERenderer ter;
+    public TileEngine.TERenderer ter;
     public TETile T = Tileset.WALL;
     public static final int WIDTH = 80;
     public static final int HEIGHT = 160;
@@ -20,6 +19,7 @@ public class World implements Serializable {
     public World() {
         ter = new TERenderer();
         ter.initialize(WIDTH, HEIGHT);
+        world = new TETile[WIDTH][HEIGHT];
     }
 
     //adds N tiles to a row at specified location
@@ -36,10 +36,13 @@ public class World implements Serializable {
         System.out.println(newShape.coordinates[1]);
         System.out.println(newShape.coordinates[2]);
         System.out.println(newShape.coordinates[3]);
-
-//        for (int[] coords : newShape.coordinates[newShape.rotation]) {
-
-//        }
+        System.out.println(Arrays.toString(newShape.coordinates[newShape.rotation]));
+        for (int coords : newShape.coordinates[newShape.rotation]) {
+            System.out.println(coords);
+            System.out.println(Arrays.toString(Shape.convertCoord(coords)));
+            int[] x_y = Shape.convertCoord(coords);
+            addTiles(x_y[0], x_y[1], Tileset.GRASS, 1);
+        }
     }
 
     public void addSpaces() {
@@ -61,14 +64,37 @@ public class World implements Serializable {
         }
     }
 
+    public  void drawRoom(int width, int height,
+                          int xPos, int yPos, TETile t) {
+        //if the room is out of bounds just don't draw it
+        if (width + xPos > WIDTH || height + yPos > HEIGHT) {
+            return;
+        }
+        //draws outline of room
+        drawRectangle(width, height, xPos, yPos, t);
+        //hollows out room by filling it in with FLOOR
+        drawRectangle(width - 2, height - 2, xPos + 1, yPos + 1, Tileset.FLOOR);
+        //generates room coordinates
+    }
+
 
     //where all the drawing happens
     public void generateWorld() {
-        world = new TETile[WIDTH][HEIGHT];
         addSpaces();
+        drawRoom(WIDTH, HEIGHT, 0, 0, Tileset.FLOWER);
+        ter.renderFrame(world);
         System.out.println(WIDTH);
         System.out.println(HEIGHT);
-        drawRectangle(WIDTH - 5, HEIGHT - 5, 1, 1, Tileset.WALL);
+        drawShape();
+
+
+
+
+
         ter.renderFrame(world);
+    }
+
+    public static TETile[][] getWorld() {
+        return world;
     }
 }

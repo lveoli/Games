@@ -1,7 +1,6 @@
-package logic;
-
 import TileEngine.TERenderer;
 import TileEngine.TETile;
+import TileEngine.Tileset;
 import edu.princeton.cs.introcs.StdDraw;
 
 import java.awt.*;
@@ -14,6 +13,7 @@ import java.util.Random;
 public class Main {
     public static boolean GAMEWON = false;
     private static boolean SHOULDSAVE = false;
+    public static int[] currentCoord;
     private static TERenderer ter;
 
     public static void drawFrame(int xPos, int yPos, String s) {
@@ -23,7 +23,6 @@ public class Main {
     }
 
     public static void startScreen() {
-        Random x = new Random();
         ter = new TERenderer();
         StdDraw.setCanvasSize(World.WIDTH * 16, World.HEIGHT * 16);
         Font font = new Font("Monaco", Font.BOLD, 30);
@@ -58,7 +57,7 @@ public class Main {
 
     public static void main(String[] args) {
         startScreen();
-        World hello = new World();
-        hello.drawShape();
+//        World hello = new World();
+//        hello.drawShape();
     }
 }
