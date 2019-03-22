@@ -230,7 +230,7 @@ public class TERenderer {
         }
 
         private static int newColorValue(int v, int dv, Random r) {
-            int rawNewValue = v + byog.Core.RandomUtils.uniform(r, -dv, dv + 1);
+            int rawNewValue = v + logic.RandomUtils.uniform(r, -dv, dv + 1);
 
             // make sure value doesn't fall outside of the range 0 to 255.
             int newValue = Math.min(255, Math.max(0, rawNewValue));
