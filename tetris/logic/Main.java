@@ -2,6 +2,7 @@ package logic;
 
 import TileEngine.TERenderer;
 import TileEngine.TETile;
+import TileEngine.Tileset;
 import edu.princeton.cs.introcs.StdDraw;
 
 import java.awt.*;
@@ -12,8 +13,6 @@ import java.util.Random;
  *  in either keyboard or input string mode.
  */
 public class Main {
-    public static final int WIDTH = 80;
-    public static final int HEIGHT = 40;
     public static boolean GAMEWON = false;
     private static boolean SHOULDSAVE = false;
     private static TERenderer ter;
@@ -26,7 +25,7 @@ public class Main {
 
     public static void startScreen() {
         ter = new TERenderer();
-        StdDraw.setCanvasSize(80 * 16, 40 * 16);
+        StdDraw.setCanvasSize(World.WIDTH * 16, World.HEIGHT * 16);
         Font font = new Font("Monaco", Font.BOLD, 30);
         StdDraw.setFont(font);
         StdDraw.setXscale(0, 80);
@@ -42,7 +41,12 @@ public class Main {
         char keyPress = waitForInput();
         if (keyPress == 'n') {
             World world = new World();
-            world.generateWorld();
+            StdDraw.clear();
+            world.getWorld()[20][20] = Tileset.FLOWER;
+            world.getWorld()[20][20] = Tileset.NOTHING;
+            ter.renderFrame(world.getWorld());
+            StdDraw.show();
+//            world.generateWorld();
         } else if (keyPress == 'q') {
             StdDraw.clear();
             StdDraw.text(40, 19, "See you next time!");

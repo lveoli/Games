@@ -23,7 +23,8 @@ public class Shape {
 
      //generates a random shape and rotation
      public static Shape generateShape() {
-         int randomN = getRandomNumber() % 2;
+        int randomN = 1;
+//         int randomN = getRandomNumber() % 2;
          Shape newShape = new Shape(randomN);
          newShape.rotation = getRandomNumber() % 4;
          return newShape;
