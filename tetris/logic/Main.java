@@ -12,8 +12,6 @@ import java.util.Random;
  *  in either keyboard or input string mode.
  */
 public class Main {
-    public static final int WIDTH = 80;
-    public static final int HEIGHT = 40;
     public static boolean GAMEWON = false;
     private static boolean SHOULDSAVE = false;
     private static TERenderer ter;
@@ -27,7 +25,7 @@ public class Main {
     public static void startScreen() {
         Random x = new Random();
         ter = new TERenderer();
-        StdDraw.setCanvasSize(80 * 16, 40 * 16);
+        StdDraw.setCanvasSize(World.WIDTH * 16, World.HEIGHT * 16);
         Font font = new Font("Monaco", Font.BOLD, 30);
         StdDraw.setFont(font);
         StdDraw.setXscale(0, 80);

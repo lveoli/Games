@@ -2,24 +2,20 @@ package logic;
 import TileEngine.TETile;
 import TileEngine.Tileset;
 import TileEngine.TERenderer;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 import java.io.Serializable;
-import java.util.Random;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.HashMap;
+import java.util.*;
 
 
 public class World implements Serializable {
-    private static final long serialVersionUID = 45498234798734234L;
     public static TETile[][] world;
 
     //maps rooms to their coordinates
     public TERenderer ter;
     public TETile T = Tileset.WALL;
-    public final int WIDTH = 80;
-    public final int HEIGHT = 40;
+    public static final int WIDTH = 80;
+    public static final int HEIGHT = 160;
 
     public World() {
         ter = new TERenderer();
@@ -36,7 +32,7 @@ public class World implements Serializable {
     public void drawShape() {
         Shape newShape = Shape.generateShape();
         System.out.println(newShape.coordinates);
-        System.out.println(newShape.coordinates[0]);
+        System.out.println(Arrays.toString(newShape.coordinates[0]));
         System.out.println(newShape.coordinates[1]);
         System.out.println(newShape.coordinates[2]);
         System.out.println(newShape.coordinates[3]);
@@ -58,7 +54,6 @@ public class World implements Serializable {
     public void drawRectangle(int width, int length,
                               int xPos, int yPos, TETile t) {
         int charPerRow = width;
-
         //adds in the tiles row by row starting at the bottom
         for (int row = 0; row < length; row++) {
             addTiles(xPos, yPos, t, charPerRow);
@@ -71,6 +66,9 @@ public class World implements Serializable {
     public void generateWorld() {
         world = new TETile[WIDTH][HEIGHT];
         addSpaces();
-
+        System.out.println(WIDTH);
+        System.out.println(HEIGHT);
+        drawRectangle(WIDTH - 5, HEIGHT - 5, 1, 1, Tileset.WALL);
+        ter.renderFrame(world);
     }
 }
