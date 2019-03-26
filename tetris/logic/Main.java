@@ -24,8 +24,8 @@ public class Main {
 
     public static void startScreen() {
         ter = new TERenderer();
-        StdDraw.setCanvasSize(World.WIDTH * 16, World.HEIGHT * 16);
-        Font font = new Font("Monaco", Font.BOLD, 30);
+        StdDraw.setCanvasSize(World.WIDTH * TERenderer.TILE_SIZE, World.HEIGHT * TERenderer.TILE_SIZE);
+        Font font = new Font("Monaco", Font.BOLD, 80);
         StdDraw.setFont(font);
         StdDraw.setXscale(0, 80);
         StdDraw.setYscale(0, 40);

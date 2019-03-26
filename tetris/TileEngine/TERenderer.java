@@ -14,7 +14,7 @@ import java.util.Random;
  * allowing scrolling of the screen or tracking the player or something similar.
  */
 public class TERenderer {
-    private static final int TILE_SIZE = 16;
+    public static final int TILE_SIZE = 120;
     private int width;
     private int height;
     private int xOffset;

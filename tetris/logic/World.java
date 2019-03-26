@@ -13,8 +13,8 @@ public class World {
     //maps rooms to their coordinates
     public TileEngine.TERenderer ter;
     public TETile T = Tileset.WALL;
-    public static final int WIDTH = 80;
-    public static final int HEIGHT = 160;
+    public static final int WIDTH = 10;
+    public static final int HEIGHT = 20;
 
     public World() {
         ter = new TERenderer();
