@@ -29,20 +29,21 @@ public class World {
         }
     }
 
-    public void drawShape() {
-        Shape newShape = Shape.generateShape();
-        System.out.println(newShape.coordinates);
-        System.out.println(Arrays.toString(newShape.coordinates[0]));
-        System.out.println(newShape.coordinates[1]);
-        System.out.println(newShape.coordinates[2]);
-        System.out.println(newShape.coordinates[3]);
-        System.out.println(Arrays.toString(newShape.coordinates[newShape.rotation]));
+    public void drawShape(Shape shape) {
+        Shape newShape = shape;
+//        System.out.println(newShape.coordinates);
+//        System.out.println(Arrays.toString(newShape.coordinates[0]));
+//        System.out.println(newShape.coordinates[1]);
+//        System.out.println(newShape.coordinates[2]);
+//        System.out.println(newShape.coordinates[3]);
+//        System.out.println(Arrays.toString(newShape.coordinates[newShape.rotation]));
         for (int coords : newShape.coordinates[newShape.rotation]) {
-            System.out.println(coords);
-            System.out.println(Arrays.toString(Shape.convertCoord(coords)));
+//            System.out.println(coords);
+//            System.out.println(Arrays.toString(Shape.convertCoord(coords)));
             int[] x_y = Shape.convertCoord(coords);
-            addTiles(x_y[0], x_y[1], Tileset.GRASS, 1);
+            addTiles(x_y[0] + Main.currentCoord[0], x_y[1] + Main.currentCoord[1], Tileset.GRASS, 1);
         }
+        ter.renderFrame(world);
     }
 
     public void addSpaces() {
@@ -82,15 +83,6 @@ public class World {
     public void generateWorld() {
         addSpaces();
         drawRoom(WIDTH, HEIGHT, 0, 0, Tileset.FLOWER);
-        ter.renderFrame(world);
-        System.out.println(WIDTH);
-        System.out.println(HEIGHT);
-        drawShape();
-
-
-
-
-
         ter.renderFrame(world);
     }
 

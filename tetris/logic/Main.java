@@ -11,12 +11,15 @@ import java.util.Random;
  *  in either keyboard or input string mode.
  */
 public class Main {
-    public static boolean GAMEWON = false;
+    public static boolean GAMELOST = false;
     private static boolean SHOULDSAVE = false;
     public static int[] currentCoord;
+    public static World WORLD;
     private static TERenderer ter;
 
     public static void drawFrame(int xPos, int yPos, String s) {
+        WORLD = new World();
+        currentCoord = new int[]{5, 15};
         StdDraw.clear();
         StdDraw.text(xPos, yPos, s);
         StdDraw.show();
@@ -38,9 +41,8 @@ public class Main {
         StdDraw.text(40, 18, "(Q) Quit");
         StdDraw.show();
         char keyPress = waitForInput();
-        if (keyPress == 'n') {
-            World world = new World();
-            world.generateWorld();
+        if (keyPress == 'w') {
+            WORLD.generateWorld();
         } else if (keyPress == 'q') {
             StdDraw.clear();
             StdDraw.text(40, 19, "See you next time!");
@@ -55,9 +57,42 @@ public class Main {
         return Character.toLowerCase(StdDraw.nextKeyTyped());
     }
 
-    public static void main(String[] args) {
+    public static void interpretKey(char key) {
+        switch (key) {
+            case 's':
+                System.out.println("pls");
+                if (currentCoord[0] <= 2) {
+                    System.out.println("wtf");
+                    return;
+                }
+                currentCoord[0] -= 1;
+                System.out.println(currentCoord[0]);
+                System.out.println("?>?/?");
+            case 'd':
+                if (currentCoord[0] >= 7) {
+                    return;
+                }
+                currentCoord[0] += 1;
+        }
+    }
+
+
+    public static void main(String[] args) throws InterruptedException {
         startScreen();
-//        World hello = new World();
-//        hello.drawShape();
+        while(!GAMELOST) {
+            while(currentCoord[1] != 0) {
+                for(int i = 1; i < 10; i++){
+                    Thread.sleep(i * 10);
+                    if (StdDraw.hasNextKeyTyped()) {
+                        interpretKey(StdDraw.nextKeyTyped());
+                    }
+                }
+                Shape currentShape = Shape.generateShape();
+                WORLD.drawShape(currentShape);
+                currentCoord[1] -= 1;
+                System.out.println("current x coord: " + currentCoord[0]);
+                WORLD.generateWorld();
+            }
+        }
     }
 }
