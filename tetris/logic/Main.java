@@ -88,27 +88,23 @@ public class Main {
 
 
     public static void main(String[] args) throws InterruptedException {
-//        if (startScreen() == 'w') {
         startScreen();
-            while(!GAMELOST) {
-                while (currentCoord[1] != 0) {
-                    for (int i = 1; i < 10; i++) {
-                        Thread.sleep(20);
-                        if (StdDraw.hasNextKeyTyped()) {
-                            interpretKey(StdDraw.nextKeyTyped());
-                        }
-                        ter.renderFrame(World.getWorld());
+        while(!GAMELOST) {
+            while (currentCoord[1] != 0) {
+                for (int i = 1; i < 10; i++) {
+                    Thread.sleep(20);
+                    if (StdDraw.hasNextKeyTyped()) {
+                        interpretKey(StdDraw.nextKeyTyped());
                     }
-                    Shape currentShape = Shape.generateShape();
-                    WORLD.drawShape(currentShape);
-                    Thread.sleep(300);
-                    currentCoord[1] -= 1;
-                    System.out.println("current x coord: " + currentCoord[0]);
-                    WORLD.generateWorld();
+                    ter.renderFrame(World.getWorld());
                 }
+                Shape currentShape = Shape.generateShape();
+                WORLD.drawShape(currentShape);
+                Thread.sleep(300);
+                currentCoord[1] -= 1;
+                System.out.println("current x coord: " + currentCoord[0]);
+                WORLD.generateWorld();
             }
-//        } else {
-//            System.out.println("u quit af");
-//        }
+        }
     }
 }
